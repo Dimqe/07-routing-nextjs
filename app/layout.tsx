@@ -8,13 +8,20 @@ export const metadata = {
   description: 'Notes manager',
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+  modal, // 👈 додаємо слот для модалки
+}: {
+  children: React.ReactNode;
+  modal: React.ReactNode; // 👈 описуємо його тип
+}) {
   return (
     <html lang="en">
       <body>
         <TanStackProvider>
           <Header />
           {children}
+          {modal} {/* 👈 тут рендериться твоя модалка */}
           <Footer />
         </TanStackProvider>
       </body>

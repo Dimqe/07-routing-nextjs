@@ -45,3 +45,6 @@ const Modal = ({ onClose, children }: ModalProps) => {
 };
 
 export default Modal;
+
+
+
