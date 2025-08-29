@@ -16,6 +16,7 @@ export interface FetchNotesParams {
   page?: number;
   perPage?: number;
   search?: string;
+  tag?: string;
 }
 
 export interface FetchNotesResponse {
@@ -23,14 +24,15 @@ export interface FetchNotesResponse {
   totalPages: number;
 }
 
-export const fetchNotes = async ({ page, perPage, search }: FetchNotesParams): Promise<FetchNotesResponse> => {
+export const fetchNotes = async ({ page, perPage, search, tag }: FetchNotesParams): Promise<FetchNotesResponse> => {
   const params: FetchNotesParams = {};
   if (page !== undefined) params.page = page;
   if (perPage !== undefined) params.perPage = perPage;
   if (search && search.trim() !== '') params.search = search;
-  const response: AxiosResponse<FetchNotesResponse> = await instance.get('/notes', { params });
+  if (tag && tag !== 'All') params.tag = tag; 
 
-  return response.data; 
+  const response: AxiosResponse<FetchNotesResponse> = await instance.get('/notes', { params });
+  return response.data;
 };
 
 export const createNote = async (noteData: Omit<Note, 'id' | 'createdAt' | 'updatedAt'>): Promise<Note> => {
