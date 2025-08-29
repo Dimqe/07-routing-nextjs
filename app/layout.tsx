@@ -10,10 +10,10 @@ export const metadata = {
 
 export default function RootLayout({
   children,
-  modal, // 👈 додаємо слот для модалки
+  modal, 
 }: {
   children: React.ReactNode;
-  modal: React.ReactNode; // 👈 описуємо його тип
+  modal: React.ReactNode; 
 }) {
   return (
     <html lang="en">
@@ -21,7 +21,7 @@ export default function RootLayout({
         <TanStackProvider>
           <Header />
           {children}
-          {modal} {/* 👈 тут рендериться твоя модалка */}
+          {modal} 
           <Footer />
         </TanStackProvider>
       </body>

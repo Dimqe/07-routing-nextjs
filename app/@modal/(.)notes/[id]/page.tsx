@@ -12,11 +12,9 @@ export default async function NoteModalPage({ params }: NotePageProps) {
   if (!note) return notFound();
 
   return (
-    <Modal onClose={() => window.history.back()}>
+    <Modal>
       <NotePreview note={note} />
     </Modal>
   );
 }
-
-
 

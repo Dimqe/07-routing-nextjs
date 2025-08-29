@@ -35,5 +35,5 @@ export default function TagsMenu() {
         </ul>
       )}
     </div>
-  );
+  ); 
 }
