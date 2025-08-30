@@ -1,26 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 import css from "./Modal.module.css";
 
 interface ModalProps {
   children: React.ReactNode;
-  onClose?: () => void; 
+  onClose?: () => void;
 }
 
 const Modal = ({ children, onClose }: ModalProps) => {
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     if (onClose) {
-      onClose(); 
+      onClose();
     } else {
-      router.back(); 
+      router.back();
     }
-  };
+  }, [onClose, router]);
 
   useEffect(() => {
     setMounted(true);
@@ -39,7 +39,7 @@ const Modal = ({ children, onClose }: ModalProps) => {
       window.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = prevOverflow;
     };
-  }, [onClose]);
+  }, [handleClose]);
 
   const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (e.target === e.currentTarget) handleClose();
@@ -55,7 +55,6 @@ const Modal = ({ children, onClose }: ModalProps) => {
       onClick={handleBackdropClick}
     >
       <div className={css.modal}>
-       
         <button
           type="button"
           className={css.closeButton}
@@ -72,4 +71,3 @@ const Modal = ({ children, onClose }: ModalProps) => {
 };
 
 export default Modal;
-

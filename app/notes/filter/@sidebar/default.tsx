@@ -8,7 +8,7 @@ export default function SidebarNotes() {
       {tags.map((tag) => (
         <li key={tag} className={css.menuItem}>
           <a
-            href={tag === "All" ? "/notes/filter" : `/notes/filter/${tag}`}
+            href={tag === "All" ? "/notes/filter/All" : `/notes/filter/${tag}`}
             className={css.menuLink}
           >
             {tag}
