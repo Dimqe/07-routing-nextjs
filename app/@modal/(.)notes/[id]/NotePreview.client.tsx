@@ -8,14 +8,14 @@ import css from "./NotePreview.module.css";
 import type { Note } from "@/types/note";
 
 interface NotePreviewProps {
-  id?: string; // може прийти як проп, але необов'язковий
+  id?: string; 
 }
 
 export default function NotePreview({ id }: NotePreviewProps) {
   const router = useRouter();
   const params = useParams();
 
-  // якщо id не передали пропсом → беремо з URL
+
   const noteId = id ?? (params?.id as string);
 
   const {
@@ -25,7 +25,7 @@ export default function NotePreview({ id }: NotePreviewProps) {
   } = useQuery<Note>({
     queryKey: ["note", noteId],
     queryFn: () => fetchNoteById(noteId),
-    refetchOnMount: "always",
+    refetchOnMount: false, 
   });
 
   const handleClose = () => {
@@ -53,9 +53,9 @@ export default function NotePreview({ id }: NotePreviewProps) {
       <div className={css.modalContent}>
         <h2 className={css.title}>{note.title}</h2>
         <p className={css.content}>{note.content}</p>
-        <p className={css.tag}>Tag: {note.tag}</p>
+        <p className={css.tag}>Tag: {note.tag ?? "no tag"}</p>
         <p className={css.date}>
-          Created: {new Date(note.createdAt).toLocaleString()}
+          Created: {note.createdAt ? new Date(note.createdAt).toLocaleString() : "unknown"}
         </p>
       </div>
     </Modal>

@@ -7,7 +7,7 @@ import {
   dehydrate,
   HydrationBoundary,
 } from "@tanstack/react-query";
-import type { Note } from "@/types/note"; // ✅ імпорт типу
+import type { Note } from "@/types/note"; 
 
 interface NotePageProps {
   params: Promise<{ id: string }>;
@@ -22,8 +22,7 @@ export default async function NoteModalPage({ params }: NotePageProps) {
     queryFn: () => fetchNoteById(id),
   });
 
-  const note = queryClient.getQueryData<Note>(["note", id]); // ✅ правильний тип
-
+  const note = queryClient.getQueryData<Note>(["note", id]); 
   if (!note) return notFound();
 
   return (
